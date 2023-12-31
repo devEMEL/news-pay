@@ -1,23 +1,78 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+
+// This file is the entry point for the app. It is used to wrap the app with the RainbowKitProvider and WagmiConfig components.
+
+// Import the global style sheet as well as the RainbowKit and react-toastify stylesheets.
+import "react-toastify/dist/ReactToastify.css";
+import "@rainbow-me/rainbowkit/styles.css";
+
+// Import the connectorsForWallets function to create a list of wallets to connect to.
+// Import the RainbowKitProvider component to wrap the app with.
+import {
+  connectorsForWallets,
+  RainbowKitProvider,
+} from "@rainbow-me/rainbowkit";
+
+// Import three different wallets connectors from the RainbowKit package.
+import { metaMaskWallet } from "@rainbow-me/rainbowkit/wallets";
+//
+import { Chain, getDefaultWallets } from "@rainbow-me/rainbowkit";
+// Import configureChains, createClient, and WagmiConfig from the Wagmi package to configure the Wagmi client.
+import { configureChains, createClient, WagmiConfig } from "wagmi";
+
+// Import the jsonRpcProvider from the Wagmi package to specify the RPC URLs of the chains we want to connect to.
+import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
+
+// Import the ToastContainer component from react-toastify to display notifications.
+import { ToastContainer } from "react-toastify";
+
+import { publicProvider } from "wagmi/providers/public";
+const okpoko = {
+  id: 0x500fad,
+  name: "Okpoko",
+  network: "okpoko",
+  iconUrl: "https://example.com/icon.svg",
+  iconBackground: "#fff",
+  nativeCurrency: {
+    decimals: 18,
+    name: "OKPOKO",
+    symbol: "OKP",
+  },
+  rpcUrls: {
+    public: { http: ["http://173.249.25.82:8545"] },
+    default: { http: ["http://173.249.25.82:8545"] },
+  },
+
+  testnet: false,
+};
+const { provider, chains } = configureChains([okpoko], [publicProvider()]);
+
+const { connectors } = getDefaultWallets({
+  appName: "My RainbowKit App",
+  projectId: "YOUR_PROJECT_ID",
+  chains,
+});
+
+// Create the Wagmi client.
+const wagmiClient = createClient({
+  autoConnect: true,
+  connectors,
+  provider,
+});
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <WagmiConfig client={wagmiClient}>
+        <RainbowKitProvider chains={chains} coolMode={true}>
+          <ToastContainer position={"bottom-center"} />
+          {/* header */}
+          {/* routes */}
+          {/* footer */}
+          <p className="bg-[#f3f3f3] text-2xl">hello world</p>
+        </RainbowKitProvider>
+      </WagmiConfig>
     </div>
   );
 }
