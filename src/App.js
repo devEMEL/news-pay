@@ -38,12 +38,14 @@ const okpoko = {
     symbol: "OKP",
   },
   rpcUrls: {
-    public: { http: ["http://173.249.25.82:8545"] },
-    default: { http: ["http://173.249.25.82:8545"] },
+    public: { http: ["http://devemel123.xyz:8545"] },
+    default: { http: ["http://devemel123.xyz:8545"] },
   },
 
   testnet: false,
 };
+// 173.249.25.82
+// devemel123.xyz 
 const { provider, chains } = configureChains([okpoko], [publicProvider()]);
 
 const { connectors } = getDefaultWallets({

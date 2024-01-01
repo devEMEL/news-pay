@@ -12,10 +12,12 @@ const Faucet = () => {
     const providerRPC = {
         okpoko: {
             name: "okpoko",
-            rpc: "http://173.249.25.82:8545",
+            rpc: "http://devemel123.xyz:8545",
             chainId: 0x500fad,
         },
     };
+    // 173.249.25.82
+    // devemel123.xyz 
     // 3. Create ethers provider
     const provider = new ethers.providers.JsonRpcProvider(providerRPC.okpoko.rpc, {
         chainId: providerRPC.okpoko.chainId,
