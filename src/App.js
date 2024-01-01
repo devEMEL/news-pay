@@ -47,8 +47,8 @@ const okpoko = {
 const { provider, chains } = configureChains([okpoko], [publicProvider()]);
 
 const { connectors } = getDefaultWallets({
-  appName: "My RainbowKit App",
-  projectId: "YOUR_PROJECT_ID",
+  appName: "NewzPay",
+  projectId: "f2b6bcbe27485bc2aa6c3c619c9e7165",
   chains,
 });
 
