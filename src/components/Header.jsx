@@ -15,6 +15,7 @@ export default function Header() {
   useEffect(() => {
     if (isConnected && ethBalance) {
       setDisplayBalance(true);
+      console.log("great oo")
       return;
     }
     setDisplayBalance(false);

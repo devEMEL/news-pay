@@ -23,10 +23,9 @@ const AddProductModal = () => {
   const [imageURL, setImageURL] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
- 
+
   // The loading state is used to display a loading message
   const [loading, setLoading] = useState("");
-
 
   // Check if all the input fields are filled
   const isComplete = name && imageURL && description && price;
@@ -69,6 +68,7 @@ const AddProductModal = () => {
   // Define function that handles the creation of a product, if a user submits the product form
   const addProduct = async (e) => {
     e.preventDefault();
+    console.log("creating");
     try {
       // Display a notification while the product is being added to the marketplace
       await toast.promise(handleCreateProduct(), {
@@ -89,30 +89,21 @@ const AddProductModal = () => {
   // Get the user's address and balance
   const { address, isConnected } = useAccount();
 
-  // If the user is connected and has a balance, display the balance
-  // useEffect(() => {
-  //   if (isConnected) {
-  //     setDisplayBalance(true);
-  //     return;
-  //   }
-  //   setDisplayBalance(false);
-  // }, [isConnected]);
-
   // Define the JSX that will be rendered
   return (
     <div className={"flex flex-row w-full justify-between"}>
-      <div>
         {/* Add Product Button that opens the modal */}
-
-        <button
-          type="button"
-          onClick={() => setVisible(true)}
-          className="inline-block ml-4 px-6 py-2.5 bg-black text-white font-medium text-md leading-tight rounded-2xl shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-          data-bs-toggle="modal"
-          data-bs-target="#exampleModalCenter"
-        >
-          <p>List Camera</p>
-        </button>
+        <div className="mt-20 flex ml-20">
+          <button
+            type="button"
+            onClick={() => setVisible(true)}
+            className="inline-block ml-4 px-6 py-2.5 bg-black text-white font-medium text-md leading-tight shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModalCenter"
+          >
+            <p>List Camera</p>
+          </button>
+        </div>
 
         {/* Modal */}
         {visible && (
@@ -198,7 +189,7 @@ const AddProductModal = () => {
           </div>
         )}
       </div>
-    </div>
+    
   );
 };
 

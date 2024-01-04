@@ -11,7 +11,7 @@ import Product from "./Product";
 // Define the ProductList component
 const ProductList = () => {
     // Use the useContractCall hook to read how many products are in the marketplace contract
-    const { data } = useContractCall("getNewsLength", [], true);
+    const { data } = useContractCall("cameraLength", [], true);
     // Convert the data to a number
     const productLength = data ? Number(data.toString()) : 0;
     // Define the states to store the error, success and loading messages

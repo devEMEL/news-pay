@@ -68,7 +68,7 @@ const Faucet = () => {
       </div>
       <div className="text-center mt-8 text-2xl">
         <button
-          className="text-[30px] bg-[#000000] text-[#FFFFFF] p-4"
+          className="text-[30px] bg-[#000000] text-[#FFFFFF] px-6 py-2.5"
           onClick={getFaucet}
         >
           Click Here To Get Faucet

@@ -24,10 +24,9 @@ import { ToastContainer } from "react-toastify";
 import { publicProvider } from "wagmi/providers/public";
 import Header from "./components/Header";
 import Home from "./components/Home";
-import Footer from "./components/Footer";
 import Faucet from "./components/Faucet";
 const okpoko = {
-  id: 0x500fad,
+  id: 0x5232cb,
   name: "onimisi",
   network: "onimisi",
   iconUrl: "https://example.com/icon.svg",
@@ -76,7 +75,7 @@ function App() {
               <Route path="/faucet" element={<Faucet />} />
             </Routes>
             {/* footer */}
-            <Footer />
+           
           </BrowserRouter>
         </RainbowKitProvider>
       </WagmiConfig>
