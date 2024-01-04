@@ -28,18 +28,18 @@ import Footer from "./components/Footer";
 import Faucet from "./components/Faucet";
 const okpoko = {
   id: 0x500fad,
-  name: "Okpoko",
-  network: "okpoko",
+  name: "onimisi",
+  network: "onimisi",
   iconUrl: "https://example.com/icon.svg",
   iconBackground: "#fff",
   nativeCurrency: {
     decimals: 18,
-    name: "OKPOKO",
-    symbol: "OKP",
+    name: "ONIMISI",
+    symbol: "ONI",
   },
   rpcUrls: {
-    public: { http: ["http://devemel123.xyz:8545"] },
-    default: { http: ["http://devemel123.xyz:8545"] },
+    public: { http: ["http://161.97.115.129:8545"] },
+    default: { http: ["http://161.97.115.129:8545"] },
   },
 
   testnet: false,
@@ -50,7 +50,7 @@ const { provider, chains } = configureChains([okpoko], [publicProvider()]);
 
 const { connectors } = getDefaultWallets({
   appName: "NewzPay",
-  projectId: "f2b6bcbe27485bc2aa6c3c619c9e7165",
+  projectId: "acd57ed82dc47b41ce8ff13f61d08518",
   chains,
 });
 

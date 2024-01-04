@@ -13,31 +13,30 @@ import { useDebounce } from "use-debounce";
 // Import our custom useContractSend hook to write a product to the marketplace contract
 import { useContractSend } from "../hooks/contract/useContractWrite";
 
-
 // The AddProductModal component is used to add a product to the marketplace
 const AddProductModal = () => {
   // The visible state is used to toggle the modal
   const [visible, setVisible] = useState(false);
+
   // The following states are used to store the values of the form fields
-  const [newsTitle, setNewsTitle] = useState("");
-  const [newsDescription, setNewsDescription] = useState("");
-
-  // The following states are used to store the debounced values of the form fields
-  const [debouncedNewsTitle] = useDebounce(newsTitle, 500);
-  const [debouncedNewsDescription] = useDebounce(newsDescription, 500);
-
+  const [name, setName] = useState("");
+  const [imageURL, setImageURL] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
+ 
   // The loading state is used to display a loading message
   const [loading, setLoading] = useState("");
-  // The displayBalance state is used to store the cUSD balance of the user
-  const [displayBalance, setDisplayBalance] = useState(false);
+
 
   // Check if all the input fields are filled
-  const isComplete = newsTitle && newsDescription;
+  const isComplete = name && imageURL && description && price;
 
   // Clear the input fields after the product is added to the marketplace
   const clearForm = () => {
-    setNewsTitle("");
-    setNewsDescription("");
+    setName("");
+    setImageURL("");
+    setDescription("");
+    setPrice("");
   };
 
   // Convert the product price to wei
@@ -45,8 +44,8 @@ const AddProductModal = () => {
 
   // Use the useContractSend hook to use our writeProduct function on the marketplace contract and add a product to the marketplace
   const { writeAsync: createProduct } = useContractSend(
-    "postNews",
-    [debouncedNewsTitle, debouncedNewsDescription],
+    "listCamera",
+    [name, imageURL, description, price],
     undefined
   );
 
@@ -73,8 +72,8 @@ const AddProductModal = () => {
     try {
       // Display a notification while the product is being added to the marketplace
       await toast.promise(handleCreateProduct(), {
-        pending: "Creating news...",
-        success: "News created successfully",
+        pending: "Listing Camera...",
+        success: "Camera Listed successfully",
         error: "Something went wrong. Try again.",
       });
       // Display an error message if something goes wrong
@@ -91,13 +90,13 @@ const AddProductModal = () => {
   const { address, isConnected } = useAccount();
 
   // If the user is connected and has a balance, display the balance
-  useEffect(() => {
-    if (isConnected) {
-      setDisplayBalance(true);
-      return;
-    }
-    setDisplayBalance(false);
-  }, [isConnected]);
+  // useEffect(() => {
+  //   if (isConnected) {
+  //     setDisplayBalance(true);
+  //     return;
+  //   }
+  //   setDisplayBalance(false);
+  // }, [isConnected]);
 
   // Define the JSX that will be rendered
   return (
@@ -112,7 +111,7 @@ const AddProductModal = () => {
           data-bs-toggle="modal"
           data-bs-target="#exampleModalCenter"
         >
-          <p>Add News (sports, entertainment, etc.) + </p>
+          <p>List Camera</p>
         </button>
 
         {/* Modal */}
@@ -136,22 +135,39 @@ const AddProductModal = () => {
                   aria-modal="true"
                   aria-labelledby="modal-headline"
                 >
-                  {/* Input fields for the product */}
                   <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                    <label>Title</label>
+                    <label>Name</label>
                     <input
                       onChange={(e) => {
-                        setNewsTitle(e.target.value);
+                        setName(e.target.value);
                       }}
                       required
                       type="text"
                       className="w-full bg-gray-100 p-2 mt-2 mb-3"
                     />
 
+                    <label>Image URL</label>
+                    <input
+                      onChange={(e) => {
+                        setImageURL(e.target.value);
+                      }}
+                      required
+                      type="text"
+                      className="w-full bg-gray-100 p-2 mt-2 mb-3"
+                    />
                     <label>Description</label>
                     <input
                       onChange={(e) => {
-                        setNewsDescription(e.target.value);
+                        setDescription(e.target.value);
+                      }}
+                      required
+                      type="text"
+                      className="w-full bg-gray-100 p-2 mt-2 mb-3"
+                    />
+                    <label>Price</label>
+                    <input
+                      onChange={(e) => {
+                        setPrice(e.target.value);
                       }}
                       required
                       type="text"
@@ -182,8 +198,6 @@ const AddProductModal = () => {
           </div>
         )}
       </div>
-
-     
     </div>
   );
 };
