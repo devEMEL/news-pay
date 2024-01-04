@@ -1,5 +1,6 @@
 {
   "private": true,
+  "license": "UNLICENSED",
   "dependencies": {
     "@celo/rainbowkit-celo": "^0.11.0",
     "@headlessui/react": "^1.7.13",
